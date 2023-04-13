@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server",
-    "server": "nodemon server"    
+    "server": "nodemon server"
   },
   "author": "Nelson Wu",
   "license": "ISC",
@@ -17,10 +17,12 @@
     "gravatar": "^1.8.2",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.3",
+    "normalize": "^0.3.1",
     "request": "^2.88.2"
   },
   "devDependencies": {
     "concurrently": "^8.0.1",
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "normalize-url": "^8.0.0"
   }
 }
