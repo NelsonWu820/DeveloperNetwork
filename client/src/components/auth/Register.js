@@ -28,6 +28,11 @@ const Register = ({ setAlert, register }) => {
         }
     };
 
+    	//will check auto when on /register then will move if there is a token
+		if(isAuthenticated){
+            return <Navigate to='/dashboard'/>
+        }
+
     return (
         <section className="container">
         <h1 className="large text-primary">Sign Up</h1>
@@ -68,8 +73,16 @@ const Register = ({ setAlert, register }) => {
 }
 
 Register.propTypes = {
-    setAlert : PropTypes.func.isRequired,
-    register : PropTypes.func.isRequired
-}
-
-export default connect(null, { setAlert, register })(Register);
+    setAlert: PropTypes.func.isRequired,
+    register: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool
+  };
+  
+  //will go into state auth and check then will make a prop isAuthenticated
+  const mapStateToProps = (state) => ({
+    isAuthenticated: state.auth.isAuthenticated
+  });
+  
+  //for connect from redux, which takes the state you want to map, and an object
+  //with actions which allows a props.setAlert
+  export default connect(mapStateToProps, { setAlert, register })(Register);
