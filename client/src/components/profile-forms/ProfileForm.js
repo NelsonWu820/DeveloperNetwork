@@ -1,5 +1,8 @@
 import React, {Fragment, useState} from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { createProfile } from '../../actions/profile';
+import {connect} from 'react-redux';
 
 /*
   NOTE: declare initialState outside of component
@@ -21,7 +24,7 @@ import PropTypes from 'prop-types';
     instagram: ''
   };
 
-const ProfileForm = () => {
+const ProfileForm = ({ createProfile }) => {
     const [formData, setFormData] = useState(initialState);
 
     const [displaySocialInputs, toggleSocialInputs] = useState(false);
@@ -42,6 +45,11 @@ const ProfileForm = () => {
       } = formData;
 
     const onChange = e => setFormData({...formData, [e.target.name]: e.target.value})
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        createProfile(formData);
+      };
     
     return (
         <div>
@@ -53,7 +61,7 @@ const ProfileForm = () => {
                 profile stand out
             </p>
             <small>* = required field</small>
-            <form className="form">
+            <form className="form" onSubmit={onSubmit}>
                     <div className="form-group">
                     <select name="status" value={status} onChange={onChange}>
                         <option value="0">* Select Professional Status</option>
@@ -150,8 +158,8 @@ const ProfileForm = () => {
 
 
 ProfileForm.propTypes = {
-
+    createProfile: PropTypes.func.isRequired
 };
 
 
-export default ProfileForm;
+export default connect(null, {createProfile})(ProfileForm);
