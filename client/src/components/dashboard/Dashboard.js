@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { getCurrentProfile } from '../../actions/profile';
 import { Link } from 'react-router-dom';
 import DashboardActions from './DashboardActions';
+import Experience from './Experience';
+import Education from './Education';
 
 
 const Dashboard = ({ getCurrentProfile, auth: {user}, profile: {profile} }) => {
@@ -21,6 +23,8 @@ const Dashboard = ({ getCurrentProfile, auth: {user}, profile: {profile} }) => {
           <>
             <div className="my-2">
                 <DashboardActions />
+                <Experience experience={profile.experience}/>
+                <Education education={profile.education}/>
             </div>
           </>
         ) : (
