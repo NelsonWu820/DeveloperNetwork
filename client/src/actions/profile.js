@@ -1,4 +1,4 @@
-import { PROFILE_GET, PROFILE_ERROR, PROFILE_UPDATE, ACCOUNT_DELETE, PROFILE_CLEAR } from "./types";
+import { PROFILE_GET, PROFILE_ERROR, PROFILE_UPDATE, ACCOUNT_DELETE, PROFILE_CLEAR, GET_PROFILES, GET_REPOS } from "./types";
 import api from "../utils/api";
 import { setAlert } from "./alert";
 
@@ -45,6 +45,80 @@ export const createProfile = (formData, edit = false) => async (dispatch) => {
       });
     }
   };
+
+  //get all profiles
+export const getAllProfiles = () => async (dispatch) => {
+  dispatch({ type: PROFILE_CLEAR})
+    try {
+      const res = await api.get('/profile');
+
+      dispatch({
+        type: GET_PROFILES,
+        payload: res.data
+      });
+
+    } catch (err) {
+      const errors = err.response.data.errors;
+
+      if (errors) {
+        errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+      }
+
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: { msg: err.response.statusText, status: err.response.status }
+      });
+    }
+  };
+
+//get profile by id
+export const getProfileById = (userId) => async (dispatch) => {
+    try {
+      const res = await api.get(`/profile/${userId}`);
+
+      dispatch({
+        type: PROFILE_GET,
+        payload: res.data
+      });
+
+    } catch (err) {
+      const errors = err.response.data.errors;
+
+      if (errors) {
+        errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+      }
+
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: { msg: err.response.statusText, status: err.response.status }
+      });
+    }
+  };
+
+//get Github repos
+export const getGithubRepos = (username) => async (dispatch) => {
+  try {
+    const res = await api.get(`/profile/github/${username}`);
+
+    dispatch({
+      type: GET_REPOS,
+      payload: res.data
+    });
+
+  } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+    }
+
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
 
 // Add Experience
 export const addExperience = (formData) => async (dispatch) => {
