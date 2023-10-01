@@ -582,3 +582,7 @@ button {
   right: 2rem;
   display: inline-block;
 }
+
+.profile-btn-container{
+  margin-top: 70px;
+}
