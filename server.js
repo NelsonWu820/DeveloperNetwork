@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const connectDB = require("./config/db")
 const path = require('path');
@@ -7,9 +8,8 @@ const app = express();
 //connects to mongo
 connectDB();
 
-app.use(express.json({ extended: false}));
-
-app.get("/", (req,res) => res.send("API Running"));
+//initaizes middleware
+app.use(express.json());
 
 //Define routes
 app.use("/api/users", require("./routes/api/users"));
