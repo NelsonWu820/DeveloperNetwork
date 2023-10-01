@@ -223,12 +223,12 @@ export const deleteEducation = id => async dispatch => {
 }
 
 //Delete account & profile
-export const deleteAccount = id => async dispatch => {
+export const deleteAccount = () => async dispatch => {
   if(window.confirm("Are you sure? This action can NOT be undone")){
     try {
       await api.delete('/profile');
   
-      dispatch({PROFILE_CLEAR})
+      dispatch({ type: PROFILE_CLEAR})
       dispatch({
         type: ACCOUNT_DELETE
       })
