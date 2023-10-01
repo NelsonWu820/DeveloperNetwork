@@ -5,7 +5,7 @@ const User = require('../../models/User');
 const { check, validationResult} = require("express-validator");
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken");
-const config = require("config");
+require('dotenv').config();
 
 // @route GET api/auth
 // @desc Test route
@@ -43,6 +43,7 @@ router.post('/',
             .json({ errors: [{ msg: 'Invalid Credentials' }] });
         }
   
+        //checks if password is legit
         const isMatch = await bcrypt.compare(password, user.password);
   
         if (!isMatch) {
@@ -51,6 +52,7 @@ router.post('/',
             .json({ errors: [{ msg: 'Invalid Credentials' }] });
         }
   
+        //then signs in with jwt
         const payload = {
           user: {
             id: user.id
@@ -59,7 +61,7 @@ router.post('/',
   
         jwt.sign(
           payload,
-          config.get('jwtSecret'),
+          process.env.jwtSecret,
           { expiresIn: '5 days' },
           (err, token) => {
             if (err) throw err;

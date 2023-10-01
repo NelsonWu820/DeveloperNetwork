@@ -1,11 +1,10 @@
 const express = require("express");
-const config = require('config');
+require('dotenv').config();
 const axios = require('axios');
 const router = express.Router();
 const auth = require("../../middleware/auth");
 const checkObjectId = require('../../middleware/checkObjectId');
 const { check, validationResult } = require('express-validator');
-const normalize = import('normalize-url');
 
 const Profile = require("../../models/Profile");
 const User = require("../../models/User");
@@ -16,6 +15,7 @@ const Post = require("../../models/Post");
 // @access   Private
 router.get('/me', auth, async (req, res) => {
     try {
+      //finds the user and populates info if any
       const profile = await Profile.findOne({
         user: req.user.id
       }).populate('user', ['name', 'avatar']);
@@ -61,7 +61,7 @@ router.post('/', auth,
         user: req.user.id,
         website:
           website && website !== ''
-            ? normalize(website, { forceHttps: true })
+            ? website
             : '',
         skills: Array.isArray(skills)
           ? skills
@@ -72,10 +72,10 @@ router.post('/', auth,
       // Build socialFields object
       const socialFields = { youtube, twitter, instagram, linkedin, facebook };
   
-      // normalize social fields to ensure valid url
+      //social fields
       for (const [key, value] of Object.entries(socialFields)) {
         if (value && value.length > 0)
-          socialFields[key] = normalize(value, { forceHttps: true });
+          socialFields[key] = value;
       }
       // add to profileFields
       profileFields.social = socialFields;
@@ -167,6 +167,7 @@ router.put('/experience', auth,
     try {
       const profile = await Profile.findOne({ user: req.user.id });
 
+      //adds to the top of experience 
       profile.experience.unshift(req.body);
 
       await profile.save();
@@ -186,6 +187,7 @@ router.delete('/experience/:exp_id', auth, async (req, res) => {
   try {
     const foundProfile = await Profile.findOne({ user: req.user.id });
 
+    //filters out the exp_id
     foundProfile.experience = foundProfile.experience.filter(
       (exp) => exp._id.toString() !== req.params.exp_id
     );
@@ -252,12 +254,13 @@ router.delete('/education/:edu_id', auth, async (req, res) => {
 // @access   Public
 router.get('/github/:username', async (req, res) => {
   try {
+    //the syntax on how to connect to github repos
     const uri = encodeURI(
       `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc`
     );
     const headers = {
       'user-agent': 'node.js',
-      Authorization: `token ${config.get('githubToken')}`
+      Authorization: `token ${process.env.githubToken}`
     };
 
     const gitHubResponse = await axios.get(uri, { headers });
