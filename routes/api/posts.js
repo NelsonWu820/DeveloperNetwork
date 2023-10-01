@@ -20,8 +20,10 @@ router.post('/', auth,
       }
   
       try {
+        //gets user without their password
         const user = await User.findById(req.user.id).select('-password');
   
+        //makes a new post item then saves it
         const newPost = new Post({
           text: req.body.text,
           name: user.name,
@@ -44,6 +46,7 @@ router.post('/', auth,
 // @access   Private
 router.get('/', auth, async (req, res) => {
     try {
+      //gets post where top is the newest
       const posts = await Post.find().sort({ date: -1 });
       res.json(posts);
     } catch (err) {
@@ -161,6 +164,7 @@ router.post('/comment/:id', auth, checkObjectId('id'),
         const user = await User.findById(req.user.id).select('-password');
         const post = await Post.findById(req.params.id);
   
+        //makes a new comment
         const newComment = {
           text: req.body.text,
           name: user.name,
