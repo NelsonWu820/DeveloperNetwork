@@ -28,13 +28,14 @@ function authReducer(state = initialState, action) {
         case REGISTER_FAIL:
         case AUTH_ERROR:
         case LOGIN_FAIL:
-        case LOGOUT:
         case ACCOUNT_DELETE:
+        case LOGOUT:
             return {
                 ...state,
                 token: null,
                 isAuthenticated: false,
-                loading: false
+                loading: false,
+                user: null
             };  
         default:
             return state;
