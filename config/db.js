@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
-const config = require("config");
-const db = config.get("mongoURI");
+require('dotenv').config();
+const db = process.env.mongoURI;
 
+//uses env variables to make mongouri secret then connects to mongo
 const connectDB = async() => {
     try {
         await mongoose.connect(db);
