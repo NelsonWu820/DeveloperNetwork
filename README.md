@@ -7,6 +7,7 @@ A full web application tailored specifically for software developers, offering a
 ### Built With
 
 * [![React][React.js]][React-url]
+* [![Redux][Redux.js]][Redux-url]
 * [![Bootstrap][Bootstrap.com]][Bootstrap-url]
 * [![Node][Node.js]][Node-url]
 * [![Express][Express.js]][Express-url]
@@ -21,6 +22,8 @@ Live Link: https://developer-network-frontend.vercel.app/
 <!-- MARKDOWN LINKS & IMAGES -->
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
+[Redux.js]: https://img.shields.io/badge/Redux-764ABC?logo=redux&logoColor=fff
+[Redux-url]: https://redux.js.org/
 [Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
 [Bootstrap-url]: https://getbootstrap.com
 [Node.js]: https://img.shields.io/badge/Node.js-6DA55F?logo=node.js&logoColor=white
