@@ -2,7 +2,7 @@
 ---place gif
 
 # Description
-A full web application that simulates the Amazon purchasing experience with features such as buying items, seeing past user's comments and ratings, seeing past purchases, and rating products. Operating on the MERN stack, we've utilized React for the frontend, bolstered by Redux for streamlined state management. MongoDB serves as our reliable data repository, safeguarding user information until they opt for account deletion. On the backend, Node.js and Express seamlessly handle requests, ensuring smooth communication with Mongo for data retrieval.
+A full web application tailored specifically for software developers, offering a social media experience with features like discussion initiation and interactive reactions such as liking or commenting. Each user can personalize their profile with education and work history, along with links to other social media profiles and the option to showcase their GitHub repositories. Powered by the MERN stack, our frontend relies on React with Redux for efficient state management. MongoDB serves as the reliable data hub, securely storing user information until account deletion. Meanwhile, on the backend, Node.js and Express smoothly handle requests, ensuring seamless communication with MongoDB for data retrieval."
 
 ### Built With
 
