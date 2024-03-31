@@ -15,7 +15,7 @@ A full web application that simulates the Amazon purchasing experience with feat
 
 
 Contact
-Nelson: Nelsonwu820@gmail.com
+Nelson: Nelsonwu820@gmail.com <br />
 Live Link: https://developer-network-frontend.vercel.app/
 
 <!-- MARKDOWN LINKS & IMAGES -->
